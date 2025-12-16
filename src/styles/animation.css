@@ -1,0 +1,16 @@
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ★アニメーションを適用するクラスの定義★ */
+.fade-in-animation {
+  animation-name: fadeIn; /* 定義したキーフレーム名 */
+  animation-duration: 1s; /* アニメーションの実行時間（例: 1秒） */
+  animation-timing-function: ease-out; /* 変化の仕方（例: ゆっくり終わる） */
+  animation-fill-mode: forwards; /* アニメーション終了時の状態を保持 */
+}

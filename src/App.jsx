@@ -19,7 +19,7 @@ function App() {
   };
 
   return (
-    <>
+    <div className="content-center text-center p-10">
       <Btn btnClick={handleCountUp} disabled={!onoff}>
         countup
       </Btn>
@@ -37,7 +37,7 @@ function App() {
         />
         起動
       </label>
-    </>
+    </div>
   );
 }
 

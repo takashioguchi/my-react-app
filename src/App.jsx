@@ -1,15 +1,21 @@
+import { useState } from "react";
+import Btn from "./Btn.jsx";
 import "./styles/animation.css";
 import "./Test.jsx";
-import Test from "./Test.jsx";
 
 function App() {
-  //const [count, setCount] = useState(0);
-
+  const [count, setCount] = useState(0);
+  const handleClick = () => {
+    setCount(count + 1);
+  };
+  const handleTap = () => {
+    setCount(count - 1);
+  };
   return (
     <>
-      <Test id="1" name="takashi" tel="110" />
-      <Test id="2" name="hanako" tel="119" />
-      <Test id="3" name="taro" tel="9110" />
+      <Btn btnClick={handleClick}>click</Btn>
+      <Btn btnClick={handleTap}>tap</Btn>
+      <h1>{count}</h1>
     </>
   );
 }

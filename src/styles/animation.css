@@ -14,3 +14,6 @@
   animation-timing-function: ease-out; /* 変化の仕方（例: ゆっくり終わる） */
   animation-fill-mode: forwards; /* アニメーション終了時の状態を保持 */
 }
+.is-hidden {
+  display: none;
+}

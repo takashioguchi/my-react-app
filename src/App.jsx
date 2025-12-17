@@ -1,5 +1,5 @@
 import { useState } from "react";
-//import Btn from "./Btn.jsx";
+import Btn from "./Btn.jsx";
 import "./styles/animation.css";
 import "./Test.jsx";
 
@@ -11,22 +11,23 @@ function App() {
     setOnOff(e.target.checked);
   };
 
-  const handleClick = () => {
+  const handleCountUp = () => {
     setCount(count + 1);
   };
-  const handleTap = () => {
+  const handleCountDown = () => {
     setCount(count - 1);
   };
 
   return (
     <>
-      <button onClick={handleClick} disabled={!onoff}>
+      <Btn btnClick={handleCountUp} disabled={!onoff}>
         countup
-      </button>
-      <button onClick={handleTap} disabled={!onoff}>
+      </Btn>
+      <Btn btnClick={handleCountDown} disabled={!onoff}>
         countdown
-      </button>
+      </Btn>
       <h1>{count}</h1>
+      <h2>{onoff ? "ON" : "OFF"}</h2>
       <label htmlFor="kidou">
         <input
           id="kidou"

@@ -1,48 +1,46 @@
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import Btn from "./Btn.jsx";
 import "./styles/animation.css";
 
-function App() {
-  // 初期値を定数化（リセット処理などにも再利用できる）
-  const INITIAL_USER_STATE = {
-    id: 0,
-    name: "",
-    age: 0,
-  };
+const countReducer = (state, action) => {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 };
+    case "DECREMENT":
+      return { count: state.count - 1 };
+    case "MULTIPLY":
+      return { count: state.count * 2 };
+    case "TENTIMES":
+      return { count: state.count * 10 };
+    default:
+      return state;
+  }
+};
 
+const App = () => {
   const [onoff, setOnOff] = useState(false);
-  const [countObj, setCount] = useState({ count: 0 });
-  const [user, setUser] = useState(INITIAL_USER_STATE);
+  const [state, dispatch] = useReducer(countReducer, { count: 0 });
 
   const handleChange = (e) => {
     setOnOff(e.target.checked);
   };
-  const handleUserChange = (e) => {
-    setUser((prev) => ({ ...prev, name: e.target.value }));
-  };
 
-  const handleCountUp = () => {
-    setCount((prev) => ({ count: prev.count + 1 }));
-  };
-  const handleCountDown = () => {
-    setCount((prev) => ({ count: prev.count - 1 }));
-  };
-  const handlemMultiplication = () => {
-    setCount((prev) => ({ count: prev.count * 2 }));
-  };
   return (
     <>
       <div className="content-center text-center p-10">
-        <Btn btnClick={handleCountUp} disabled={!onoff}>
+        <Btn btnClick={() => dispatch({ type: "INCREMENT" })} disabled={!onoff}>
           +1
         </Btn>
-        <Btn btnClick={handleCountDown} disabled={!onoff}>
+        <Btn btnClick={() => dispatch({ type: "DECREMENT" })} disabled={!onoff}>
           -1
         </Btn>
-        <Btn btnClick={handlemMultiplication} disabled={!onoff}>
+        <Btn btnClick={() => dispatch({ type: "MULTIPLY" })} disabled={!onoff}>
           ×2
         </Btn>
-        <h1>{countObj.count}</h1>
+        <Btn btnClick={() => dispatch({ type: "TENTIMES" })} disabled={!onoff}>
+          ×10
+        </Btn>
+        <h1>{state.count}</h1>
         <h2>{onoff ? "ON" : "OFF"}</h2>
         <label htmlFor="kidou">
           <input
@@ -56,6 +54,6 @@ function App() {
       </div>
     </>
   );
-}
+};
 
 export default App;

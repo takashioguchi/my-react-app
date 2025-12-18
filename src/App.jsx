@@ -1,22 +1,21 @@
 import { useState } from "react";
 import Btn from "./Btn.jsx";
 import "./styles/animation.css";
-import "./Test.jsx";
 
 function App() {
   const [onoff, setOnOff] = useState(false);
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState({ count: 0 });
 
   const handleChange = (e) => {
     setOnOff(e.target.checked);
   };
 
   const handleCountUp = () => {
-    setCount(count + 1);
+    setCount((prev) => ({ count: prev.count + 1 }));
   };
-  const handleCountDown = () => {
-    setCount(count - 1);
-  };
+  function handleCountDown() {
+    setCount((prev) => ({ count: prev.count - 1 }));
+  }
 
   return (
     <div className="content-center text-center p-10">

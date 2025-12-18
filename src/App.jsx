@@ -4,14 +4,12 @@ import "./styles/animation.css";
 
 const countReducer = (state, action) => {
   switch (action.type) {
-    case "INCREMENT":
-      return { count: state.count + 1 };
-    case "DECREMENT":
-      return { count: state.count - 1 };
     case "MULTIPLY":
       return { count: state.count * 2 };
     case "TENTIMES":
       return { count: state.count * 10 };
+    case "ADD_SPECFIC":
+      return { count: state.count + action.payload };
     default:
       return state;
   }
@@ -28,10 +26,16 @@ const App = () => {
   return (
     <>
       <div className="content-center text-center p-10">
-        <Btn btnClick={() => dispatch({ type: "INCREMENT" })} disabled={!onoff}>
+        <Btn
+          btnClick={() => dispatch({ type: "ADD_SPECFIC", payload: 1 })}
+          disabled={!onoff}
+        >
           +1
         </Btn>
-        <Btn btnClick={() => dispatch({ type: "DECREMENT" })} disabled={!onoff}>
+        <Btn
+          btnClick={() => dispatch({ type: "ADD_SPECFIC", payload: -1 })}
+          disabled={!onoff}
+        >
           -1
         </Btn>
         <Btn btnClick={() => dispatch({ type: "MULTIPLY" })} disabled={!onoff}>

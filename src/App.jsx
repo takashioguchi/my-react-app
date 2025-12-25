@@ -1,62 +1,74 @@
-import { useReducer, useState } from "react";
-import Btn from "./Btn.jsx";
-import "./styles/animation.css";
+// import { useRef, useState } from "react";
+// import Btn from "./Btn.jsx";
 
-const countReducer = (state, action) => {
-  switch (action.type) {
-    case "MULTIPLY":
-      return { count: state.count * 2 };
-    case "TENTIMES":
-      return { count: state.count * 10 };
-    case "ADD_SPECFIC":
-      return { count: state.count + action.payload };
-    default:
-      return state;
-  }
-};
+// const Timer = () => {
+//   const [timer, setTimer] = useState(0);
+//   const timerRef = useRef(null);
+
+//   const startTimer = () => {
+//     if (timerRef.current === null) {
+//       timerRef.current = setInterval(() => {
+//         setTimer((prev) => prev + 1);
+//       }, 1000);
+//     }
+//   };
+//   const stopTimer = () => {
+//     if (timerRef.current !== null) {
+//       clearInterval(timerRef.current);
+//       timerRef.current = null;
+//     }
+//   };
+
+//   return (
+//     <div className="content-center text-center p-10">
+//       <p className="text-9xl">{timer}</p>
+//       <Btn btnClick={startTimer}>タイマー開始</Btn>
+//       <Btn btnClick={stopTimer}>タイマー停止</Btn>
+//     </div>
+//   );
+// };
+// export default Timer;
+
+// import { useRef } from "react";
+
+// const App = () => {
+//   const inputRef = useRef(null);
+
+//   const handleButtonClick = () => {
+//     // ボタンが押されたら、inputにフォーカスを当てる
+//     inputRef.current.focus();
+//   };
+
+//   return (
+//     <div style={{ padding: "20px" }}>
+//       <input ref={inputRef} placeholder="ここに入力してね" />
+//       <button onClick={handleButtonClick}>入力を開始する</button>
+//     </div>
+//   );
+// };
+
+// export default App;
+
+import { useEffect, useState } from "react";
 
 const App = () => {
-  const [onoff, setOnOff] = useState(false);
-  const [state, dispatch] = useReducer(countReducer, { count: 0 });
+  const [size, setSize] = useState(window.innerWidth);
 
-  const handleChange = (e) => {
-    setOnOff(e.target.checked);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setSize(window.innerWidth);
+    };
 
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
-    <>
-      <div className="content-center text-center p-10">
-        <Btn
-          btnClick={() => dispatch({ type: "ADD_SPECFIC", payload: 1 })}
-          disabled={!onoff}
-        >
-          +1
-        </Btn>
-        <Btn
-          btnClick={() => dispatch({ type: "ADD_SPECFIC", payload: -1 })}
-          disabled={!onoff}
-        >
-          -1
-        </Btn>
-        <Btn btnClick={() => dispatch({ type: "MULTIPLY" })} disabled={!onoff}>
-          ×2
-        </Btn>
-        <Btn btnClick={() => dispatch({ type: "TENTIMES" })} disabled={!onoff}>
-          ×10
-        </Btn>
-        <h1>{state.count}</h1>
-        <h2>{onoff ? "ON" : "OFF"}</h2>
-        <label htmlFor="kidou">
-          <input
-            id="kidou"
-            type="checkbox"
-            checked={onoff}
-            onChange={handleChange}
-          />
-          起動
-        </label>
-      </div>
-    </>
+    <div className="content-center text-center p-10">
+      <p className="text-9xl">画面の横幅:{size}</p>
+    </div>
   );
 };
 

@@ -234,7 +234,7 @@ const App = () => {
     setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
 
   return (
-    <div>
+    <div className="content-center text-center p-10">
       {btnData.map((btn) => (
         <Btn
           key={btn.id}
